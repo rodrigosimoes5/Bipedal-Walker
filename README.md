@@ -1,42 +1,42 @@
 # Bipedal-Walker Reinforcement Learning
 
-Este repositório contém o projeto desenvolvido no âmbito da unidade curricular de **Introdução aos Sistemas Inteligentes e Autónomos**. O objetivo principal foi aplicar técnicas de Reinforcement Learning (RL) para resolver o ambiente `BipedalWalker-v3` e analisar a capacidade de adaptação dos agentes a uma alteração estrutural no ambiente (simulação de lesão).
+This repository contains the project developed for the course **Introduction to Intelligent and Autonomous Systems**. The main goal was to apply Reinforcement Learning (RL) techniques to solve the `BipedalWalker-v3` environment and analyze how well agents adapt to a structural change in the environment (injury simulation).
 
-**Autores:**
+**Authors:**
 * Francisca Cerqueira
 * Iara Ferreira
 * Rodrigo Simões
 
 ---
 
-## Visão Geral do Projeto
+## Project Overview
 
-O trabalho foi dividido em três marcos principais, focados na customização do ambiente, implementação e treino de agentes com **Stable-Baselines3**, e análise comparativa de resultados.
+The work was split into three main milestones, focusing on environment customization, implementing and training agents with **Stable-Baselines3**, and performing a comparative analysis of results.
 
-### 1. Customização do Ambiente
-* **Ambiente Base:** `BipedalWalker-v3` (Box2D/Gymnasium).
-* **Modificação Implementada:** Criação do ambiente `InjuredBipedalWalker`.
-* **Descrição:** Foi introduzida uma "lesão" mecânica no robô, caracterizada por uma **perda de 70% de potência** nos motores da perna direita.
-* **Objetivo:** Testar a robustez dos algoritmos e forçar o agente a aprender uma marcha compensatória assimétrica.
-* **Código:** Disponível em `my_envs/injured_bipedal.py`.
+### 1. Environment Customization
+* **Base Environment:** `BipedalWalker-v3` (Box2D/Gymnasium).
+* **Implemented Modification:** Creation of the `InjuredBipedalWalker` environment.
+* **Description:** A mechanical "injury" was introduced in the robot, characterized by a **70% loss of power** in the right-leg motors.
+* **Goal:** Test algorithm robustness and force the agent to learn an asymmetric compensatory gait.
+* **Code:** Available in `my_envs/injured_bipedal.py`.
 
-### 2. Agente de Reinforcement Learning
-* **Seleção de Algoritmos:** Foram comparados quatro algoritmos: **PPO**, **A2C**, **SAC** e **TD3**.
-* **Agente Selecionado:** O **TD3** (Twin Delayed DDPG) demonstrou o melhor desempenho e estabilidade nas experiências preliminares.
-* **Tuning:** Otimização de hiperparâmetros (Learning Rate, Gamma, Action Noise). A configuração vencedora para o ambiente original foi a variante "Míope" ($\gamma=0.98$), que atingiu uma pontuação média consistente de **~278 pontos**.
+### 2. Reinforcement Learning Agent
+* **Algorithm Selection:** Four algorithms were compared: **PPO**, **A2C**, **SAC**, and **TD3**.
+* **Selected Agent:** **TD3** (Twin Delayed DDPG) showed the best performance and stability in preliminary experiments.
+* **Tuning:** Hyperparameter optimization (Learning Rate, Gamma, Action Noise). The best configuration for the original environment was the "Myopic" variant ($\gamma=0.98$), which achieved a consistent average score of **~278 points**.
 
-### 3. Avaliação e Análise
-* **Teste de Robustez:** O agente treinado no ambiente saudável falhou ao ser transferido para o ambiente lesionado (queda de performance de ~278 para ~27 pontos), evidenciando a falta de generalização para falhas dinâmicas.
-* **Re-treino no Ambiente Modificado:** O treino direto no `InjuredBipedalWalker` permitiu ao agente aprender a não cair (estratégia de sobrevivência), mas com dificuldade em progredir rapidamente, resultando frequentemente em *timeouts*.
-* **Conclusão:** O agente desenvolveu uma marcha compensatória visível, sacrificando velocidade por estabilidade.
+### 3. Evaluation and Analysis
+* **Robustness Test:** The agent trained in the healthy environment failed when transferred to the injured environment (performance drop from ~278 to ~27 points), highlighting limited generalization to dynamic failures.
+* **Retraining in the Modified Environment:** Training directly in `InjuredBipedalWalker` allowed the agent to learn not to fall (a survival strategy), but it struggled to move forward efficiently, frequently resulting in *timeouts*.
+* **Conclusion:** The agent developed a visible compensatory gait, trading speed for stability.
 
 ---
 
-## Instalação e Utilização
+## Installation and Usage
 
-### 1. Pré-requisitos
-Certifica-te de que tens o Python instalado (recomendado 3.8+).
+### 1. Prerequisites
+Make sure you have Python installed (recommended 3.8+).
 
-### 2. Instalar dependências
+### 2. Install dependencies
 ```bash
 pip install -r requirements.txt
